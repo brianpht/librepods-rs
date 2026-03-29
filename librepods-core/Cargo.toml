@@ -1,0 +1,13 @@
+[package]
+name = "librepods-core"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+description = "Cross-platform core library for LibrePods — AAP protocol, device state, BLE ad parsing"
+
+[dependencies]
+thiserror = "2"
+log = "0.4"
+serde = { version = "1", features = ["derive"] }
+aes = "0.8"
+
