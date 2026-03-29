@@ -1,10 +1,10 @@
 # LIBREPODS-RS
 
-AirPods™ liberated from Apple's ecosystem — a pure-Rust implementation of the Apple Accessory Protocol (AAP), with a cross-platform core and platform-specific I/O.
+A pure-Rust implementation of the Apple Accessory Protocol (AAP) for AirPods™, with a cross-platform core and platform-specific I/O.
 
 ## Overview
 
-`librepods-rs` is an open-source tool that lets you use AirPods as first-class citizens on Linux. It speaks AAP over Bluetooth L2CAP to read battery levels, control noise cancellation, detect ear gestures, auto play/pause media, and more — all without needing an Apple device.
+`librepods-rs` is an open-source tool that lets you use AirPods as first-class citizens on Linux. It speaks AAP over Bluetooth L2CAP to read battery levels, control noise cancellation, detect ear gestures, auto play/pause media, and more. No Apple device needed.
 
 This is a clean-room Rust rewrite inspired by [LibrePods](https://github.com/kavishdevar/librepods) (Kotlin/C++), designed for embeddability, portability, and strict crate-boundary separation.
 
@@ -16,12 +16,12 @@ This is a clean-room Rust rewrite inspired by [LibrePods](https://github.com/kav
 - **Conversational Awareness**: Monitor and toggle CA status during audio playback
 - **Long-Press Configuration**: Customize which noise control modes cycle on stem press
 - **Rename**: Change your AirPods device name over AAP
-- **BLE Advertisement Decoding**: Scan for nearby AirPods without pairing — see model, battery, lid state
+- **BLE Advertisement Decoding**: Scan for nearby AirPods without pairing. See model, battery, lid state
 - **Encrypted Battery**: AES-128 decryption of high-resolution battery data from BLE ads
 - **Head Tracking**: Receive raw spatial audio head tracking sensor data
 - **Device Metadata**: Read device name, model number, manufacturer
 - **Media Control**: Automatic A2DP activation, PipeWire (`wpctl`) / PulseAudio (`pactl`) backend detection
-- **Cross-Platform Core**: `librepods-core` is pure Rust with no OS dependencies — ready to be embedded in future platform targets
+- **Cross-Platform Core**: `librepods-core` is pure Rust with no OS dependencies, ready to be embedded in future platform targets
 
 > **Note:** Some advanced features (Hearing Aid, Customize Transparency Mode, Multi-device connectivity) require changing the Bluetooth VendorID to Apple's. See [VendorID Configuration](#vendorid-configuration) below.
 
@@ -57,7 +57,7 @@ The AAP protocol is consistent across all AirPods models (based on analysis of t
 │  librepods-core         AAP parser, packet builder,      │
 │                         device state, BLE ad decoder,    │
 │                         transport traits                 │
-│                         ⚠ NO platform I/O — pure Rust    │
+│                         ⚠ NO platform I/O, pure Rust     │
 └──────────────────────────────────────────────────────────┘
 ```
 
@@ -81,8 +81,8 @@ sudo apt install -y build-essential pkg-config curl \
 |---|---|
 | `build-essential` | C linker for native crate build scripts |
 | `pkg-config` | Finds `libdbus` and `libudev` at compile time |
-| `libdbus-1-dev` | D-Bus headers — required by `zbus` (BlueZ monitor) and `btleplug` (BLE scan) |
-| `libudev-dev` | udev headers — required by `btleplug` for device enumeration |
+| `libdbus-1-dev` | D-Bus headers, required by `zbus` (BlueZ monitor) and `btleplug` (BLE scan) |
+| `libudev-dev` | udev headers, required by `btleplug` for device enumeration |
 
 ### Rust toolchain
 
@@ -112,7 +112,7 @@ Ubuntu 22.04+ ships PipeWire by default. Install the CLI tools the daemon uses a
 # PipeWire (recommended, Ubuntu 22.04+)
 sudo apt install -y wireplumber
 
-# — OR PulseAudio (older Ubuntu) —
+# Or PulseAudio (older Ubuntu)
 sudo apt install -y pulseaudio-utils
 
 # Playback control (play/pause on ear detection)
@@ -121,7 +121,7 @@ sudo apt install -y playerctl
 
 > `librepods-cli` detects the backend automatically at startup: `wpctl` → `pactl` → fallback. No config needed.
 
-### TL;DR — one-liner
+### TL;DR one-liner
 
 ```bash
 sudo apt install -y build-essential pkg-config libdbus-1-dev libudev-dev \
@@ -266,7 +266,7 @@ block-beta
   style e fill:#d8dee9,color:#4c566a
 ```
 
-**Features ACK** (from AirPods — standard header, opcode `0x2B`):
+**Features ACK** (from AirPods, standard header, opcode `0x2B`):
 
 ```mermaid
 block-beta
@@ -449,9 +449,9 @@ RUST_LOG=debug ./target/debug/librepods-cli --address AA:BB:CC:DD:EE:FF
 This project is a Rust rewrite built upon the research and reverse engineering work of the [LibrePods](https://github.com/kavishdevar/librepods) project by [@kavishdevar](https://github.com/kavishdevar).
 
 Special thanks to:
-- [@tyalie](https://github.com/tyalie) — first public documentation of the AAP protocol ([AAP-Protocol-Definition](https://github.com/tyalie/AAP-Protocol-Defintion))
-- [@rithvikvibhu](https://github.com/rithvikvibhu) and the Lagrange Point community — hearing aid feature research
-- [@timgromeyer](https://github.com/timgromeyer) — first version of the LibrePods Linux app
+- [@tyalie](https://github.com/tyalie): first public documentation of the AAP protocol ([AAP-Protocol-Definition](https://github.com/tyalie/AAP-Protocol-Defintion))
+- [@rithvikvibhu](https://github.com/rithvikvibhu) and the Lagrange Point community: hearing aid feature research
+- [@timgromeyer](https://github.com/timgromeyer): first version of the LibrePods Linux app
 - All [LibrePods contributors](https://github.com/kavishdevar/librepods/graphs/contributors) who decoded the protocol
 
 ---
